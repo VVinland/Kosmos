@@ -6,7 +6,7 @@ import { UserData } from '../types.js';
 class TokenService {
 
     generateTokens(payload: UserData) {
-        const accessToken = jsonwebtoken.sign(payload, String(process.env.JWT_ACCESS_SECRET), { expiresIn: '5m' });
+        const accessToken = jsonwebtoken.sign(payload, String(process.env.JWT_ACCESS_SECRET), { expiresIn: '15s' });
         const refreshToken = jsonwebtoken.sign(payload, String(process.env.JWT_REFRESH_SECRET), { expiresIn: '10m' });
         return { accessToken, refreshToken };
     }

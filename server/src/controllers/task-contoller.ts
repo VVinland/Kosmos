@@ -6,61 +6,46 @@ class TaskController {
     async create(req: Request, res: Response, next: NextFunction) {
         try {
             const taskData: Task = req.body;
-            const task = await taskService.create(taskData);
+            const task: TaskUpdate = await taskService.create(taskData);
             return res.json(task);
         } catch (error) {
-            if (error instanceof Error) {
-                console.log(error.message);
-                res.json(error.message);
-            }
+            next(error);
         }
     }
     async getCreatedTasks(req: Request, res: Response, next: NextFunction) {
         try {
             const { login } = req.body;
-            const tasks = await taskService.getCreatedTasks(login);
+            const tasks: TaskUpdate[] = await taskService.getCreatedTasks(login);
             return res.json(tasks);
         } catch (error) {
-            if (error instanceof Error) {
-                console.log(error.message);
-                res.json(error.message);
-            }
+            next(error);
         }
     }
     async getAssignedTasks(req: Request, res: Response, next: NextFunction) {
         try {
             const { login } = req.body;
-            const tasks = await taskService.getAssignedTasks(login);
+            const tasks: TaskUpdate[] = await taskService.getAssignedTasks(login);
             return res.json(tasks);
         } catch (error) {
-            if (error instanceof Error) {
-                console.log(error.message);
-                res.json(error.message);
-            }
+            next(error);
         }
     }
     async update(req: Request, res: Response, next: NextFunction) {
         try {
             const taskData: TaskUpdate = req.body;
-            const task = await taskService.update(taskData);
+            const task: TaskUpdate = await taskService.update(taskData);
             return res.json(task);
         } catch (error) {
-            if (error instanceof Error) {
-                console.log(error.message);
-                res.json(error.message);
-            }
+            next(error);
         }
     }
     async delete(req: Request, res: Response, next: NextFunction) {
         try {
             const { taskId } = req.body;
-            const task = await taskService.delete(taskId);
+            const task: TaskUpdate = await taskService.delete(taskId);
             return res.json(task);
         } catch (error) {
-            if (error instanceof Error) {
-                console.log(error.message);
-                res.json(error.message);
-            }
+            next(error);
         }
     }
 }

@@ -61,7 +61,8 @@ export default {
         port: 3000,
         open: true,
         hot: true,
-        liveReload: true
+        liveReload: true,
+        historyApiFallback:true
     }
 }
 

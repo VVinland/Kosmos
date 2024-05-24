@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack",
@@ -35,7 +35,11 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
+    "axios": "^1.7.2",
+    "mobx": "^6.12.3",
+    "mobx-react-lite": "^4.0.7",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.23.1"
   }
 }

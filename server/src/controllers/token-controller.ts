@@ -10,10 +10,7 @@ class TokenController {
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
             return res.json({ accessToken: userData.accessToken, user: userData.user });
         } catch (error) {
-            if (error instanceof Error) {
-                console.log(error.message);
-                return res.json(error.message);
-            }
+            next(error);
         }
     }
 }

@@ -4,10 +4,10 @@ import { Task, TaskUpdate } from "../types.js";
 class TaskService {
     async create(taskData: Task) {
         const task = await db.query(`INSERT INTO task (title, description, dateEnd,    
-        dateCreate, updateDate, priority, creator, responsible)
+        dateCreate, updateDate, priority, creator, responsible, status)
         VALUES ('${taskData.title}', '${taskData.description}','${taskData.dateEnd}',
             '${taskData.dateCreate}', '${taskData.updateDate}','${taskData.priority}',
-            '${taskData.creator}', '${taskData.responsible}') RETURNING *;`);
+            '${taskData.creator}', '${taskData.responsible}', '${taskData.status}') RETURNING *;`);
 
         return task.rows[0];
     };
@@ -24,8 +24,8 @@ class TaskService {
 
     async update(taskData: TaskUpdate) {
         const task = await db.query(`UPDATE task SET title='${taskData.title}', description='${taskData.description}',
-        updateDate='${taskData.updateDate}', creator='${taskData.creator}', responsible='${taskData.responsible}'
-        WHERE id='${taskData.id}' RETURNING*;`)
+        updateDate='${taskData.updateDate}', creator='${taskData.creator}', responsible='${taskData.responsible}',
+        status='${taskData.status}' WHERE id='${taskData.id}' RETURNING*;`)
         return task.rows[0];
     }
 

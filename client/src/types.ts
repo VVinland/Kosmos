@@ -1,3 +1,17 @@
+interface UserData {
+    id: number,
+    firstname: string,
+    lastname: string,
+    middlename: string,
+    login: string,
+    supervisor: string
+}
+
+interface AuthResponse {
+    accessToken: string,
+    user: UserData
+}
+
 interface CandidateForNewUsers {
     firstname: string,
     lastname: string,
@@ -5,18 +19,10 @@ interface CandidateForNewUsers {
     login: string,
     password: string,
     supervisor: string
-};
-
-interface UserData extends Omit<CandidateForNewUsers, 'password'> {
-    id: number
 }
 
-interface AuthUserData {
-    accessToken: string,
-    refreshToken: string,
-    user: UserData
-}
 interface Task {
+    id?: number,
     title: string,
     description: string,
     dateEnd: Date,
@@ -28,14 +34,15 @@ interface Task {
     status:string
 }
 
-interface TaskUpdate extends Task {
-    id: number
+interface RouteStructure {
+    path: string,
+    component: () => React.JSX.Element
 }
 
 export {
-    CandidateForNewUsers,
-    AuthUserData,
     UserData,
+    AuthResponse,
+    CandidateForNewUsers,
     Task,
-    TaskUpdate
+    RouteStructure
 }

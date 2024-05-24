@@ -11,9 +11,7 @@ class UserController {
             const success = await userService.registration(candidateData);
             return res.json(success);
         } catch (error) {
-            if (error instanceof Error) {
-                return res.json(error.message);
-            }
+            next(error);
         }
     }
     async login(req: Request, res: Response, next: NextFunction) {
@@ -23,21 +21,17 @@ class UserController {
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
             return res.json({ accessToken: userData.accessToken, user: userData.user });
         } catch (error) {
-            if (error instanceof Error) {
-                return res.json(error.message);
-            }
+            next(error);
         }
     }
     async logout(req: Request, res: Response, next: NextFunction) {
         try {
             const { refreshToken } = req.cookies;
-            const token = await userService.logout(refreshToken);
+            await userService.logout(refreshToken);
             res.clearCookie('refreshToken');
-            return res.json(token);
+            return res.json();
         } catch (error) {
-            if (error instanceof Error) {
-                return res.json(error.message);
-            }
+            next(error);
         }
     }
     async getLogins(req: Request, res: Response, next: NextFunction) {
@@ -45,11 +39,9 @@ class UserController {
             const logins = await userService.getLogins();
             return res.json(logins);
         } catch (error) {
-            if (error instanceof Error) {
-                return res.json(error.message);
-            }
+            next(error);
         }
-    }
+    } //под вопросом. Хотел исползовать для регистрации. Выдавать имеющихся пользователей в поле руководитель
 }
 
 export default new UserController();

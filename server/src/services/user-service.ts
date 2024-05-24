@@ -3,6 +3,7 @@ import { CandidateForNewUsers } from "../types";
 import db from '../db.js';
 import tokenService from './token-service.js';
 import UserDto from '../dtos/user-dto.js';
+import ApiError from '../exceptions/api-error.js';
 
 class UserService {
     async registration(candidateData: CandidateForNewUsers) {
@@ -11,7 +12,7 @@ class UserService {
 
         if (candidate.rows.length !== 0) {
 
-            throw new Error(`Пользователь с таким login: ${candidate.rows[0].login} уже существует`);
+            throw ApiError.BadRequest(`Пользователь с таким login: ${candidate.rows[0].login} уже существует`);
         }
         const hashPassword = await bcrypt.hash(candidateData.password, 3);
 
@@ -20,19 +21,19 @@ class UserService {
         VALUES('${candidateData.firstname}','${candidateData.lastname}','${candidateData.middlename}',
         '${candidateData.login}', '${hashPassword}', '${candidateData.supervisor}');`);
 
-        return { result: true };
+        return true;
     }
 
     async login(login: string, password: string) {
         const user = await db.query(`SELECT * FROM user_data WHERE login='${login}';`);
 
         if (user.rows.length === 0) {
-            throw new Error(`Пользователя с таким login:${login} нет`);
+            throw ApiError.BadRequest(`Пользователя с таким login:${login} нет`);
         }
 
         const isPassEqual = await bcrypt.compare(password, user.rows[0].password);
         if (!isPassEqual) {
-            throw new Error(`Пароль неверный`);
+            throw ApiError.BadRequest(`Пароль неверный`);
         }
 
         const tokens = tokenService.generateTokens({ ...user.rows[0] });
@@ -54,13 +55,13 @@ class UserService {
     }
 
     async refreshToken(refreshToken: string) {
-        if (!refreshToken) throw new Error(`Рефреш токен пустой`);
+        if (!refreshToken) throw ApiError.UnauthorizedError();
 
         const userData = tokenService.validateRefreshToken(refreshToken);
-        if (!userData) throw new Error('Рефреш токен не прошёл валидацию');
+        if (!userData) throw ApiError.UnauthorizedError();
 
         const tokenFromDb = await tokenService.findRefreshToken(refreshToken);
-        if (!tokenFromDb) throw new Error('Нет такого рефреш токена');
+        if (!tokenFromDb) throw ApiError.UnauthorizedError();
 
         const userDto = new UserDto(userData);
         const tokens = tokenService.generateTokens({ ...userDto });
