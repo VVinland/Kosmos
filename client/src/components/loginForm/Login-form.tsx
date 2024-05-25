@@ -10,7 +10,7 @@ const LoginForm = () => {
 
     const loginUser = async () => {
         try {
-            await userStore.login(login, password);
+            await userStore.login(login.replaceAll(' ', ''), password.replaceAll(' ', ''));
         } catch (error) {
             alert(error);
         }
@@ -25,11 +25,11 @@ const LoginForm = () => {
                     placeholder='Введите логин' /></label>
 
 
-            <label className='loginForm__label'> Пароль 
-            <input type="password" className='loginForm__label'
-                value={password}
-                onChange={event => setPassword(event.target.value)}
-                placeholder='Введите пароль' /></label>
+            <label className='loginForm__label'> Пароль
+                <input type="password" className='loginForm__label'
+                    value={password}
+                    onChange={event => setPassword(event.target.value)}
+                    placeholder='Введите пароль' /></label>
 
             <button className="loginForm__button" onClick={loginUser}>Авторизоваться</button>
         </div>

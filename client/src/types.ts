@@ -25,13 +25,13 @@ interface Task {
     id?: number,
     title: string,
     description: string,
-    dateEnd: Date,
-    dateCreate: Date,
-    updateDate: Date,
+    dateEnd: string
+    dateCreate: string,
+    updateDate: string,
     priority: string,
     creator: string,
     responsible: string,
-    status:string
+    status: string
 }
 
 interface RouteStructure {

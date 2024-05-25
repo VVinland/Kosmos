@@ -35,9 +35,10 @@ class UserService {
         if (!isPassEqual) {
             throw ApiError.BadRequest(`Пароль неверный`);
         }
-
+        
         const tokens = tokenService.generateTokens({ ...user.rows[0] });
         await tokenService.saveRefreshToken(user.rows[0].id, tokens.refreshToken);
+        
         return {
             ...tokens,
             user: { ...user.rows[0] }

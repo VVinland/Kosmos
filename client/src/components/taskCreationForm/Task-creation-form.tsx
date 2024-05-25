@@ -2,7 +2,9 @@ import React from 'react';
 import TaskForm from '../taskFrom/Task-form';
 const TaskCreationForm = () => {
     return (
-        <TaskForm />
+        <div className="taskCreationForm">
+            <TaskForm sign={'create'} />
+        </div>
     );
 }
 

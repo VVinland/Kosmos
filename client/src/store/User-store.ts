@@ -63,6 +63,7 @@ class UserStore {
             localStorage.removeItem('accessToken');
             this.setUserData({} as UserData);
             this.setIsAuth(false);
+            
         } catch (error) {
             if (error instanceof AxiosError) {
                 // throw new Error(error.response?.data?.message);

@@ -14,14 +14,14 @@ const RegistrationForm = () => {
     const { userStore } = useContext(Context);
 
     const registrationUser = async () => {
-        try {
+        try { 
             const candidate: CandidateForNewUsers = {
-                firstname,
-                lastname,
-                middlename,
-                login,
-                password,
-                supervisor
+                firstname: firstname.replaceAll(' ', ''),
+                lastname: lastname.replaceAll(' ', ''),
+                middlename: middlename.replaceAll(' ', ''),
+                login: login.replaceAll(' ', ''),
+                password: password.replaceAll(' ', ''),
+                supervisor: supervisor.replaceAll(' ', '')
             }
             await userStore.registration(candidate);
             alert('Пользователь успешно зарегистрировался');

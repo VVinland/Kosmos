@@ -1,24 +1,24 @@
-import React, { Children, ReactNode, useEffect } from 'react';
+import React, { Children, ReactNode, useEffect, useRef } from 'react';
 import './modal.scss';
 
-interface Props {
+interface ModalProps {
     children: ReactNode,
     visible: boolean,
     setVisible: (visible: boolean) => void;
 }
 
 
-const Modal = ({ children, visible, setVisible }: Props) => {
+const Modal = ({ children, visible, setVisible }: ModalProps) => {
+    const modalRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
     useEffect(() => {
-        const modal = document.querySelector('.modal');
         if (visible) {
-            modal!.classList.add('active');
-        } else modal!.classList.remove('active');
+            modalRef.current.classList.add('active');
+        } else modalRef.current.classList.remove('active');
     }, [visible])
 
     return (
-        <div className='modal' onClick={() => setVisible(false)}>
+        <div className='modal' onClick={() => setVisible(false)} ref={modalRef}>
             <div className='modal__content' onClick={event => event.stopPropagation()}>
                 {children}
             </div>

@@ -25,7 +25,7 @@ interface Task {
     priority: string,
     creator: string,
     responsible: string,
-    status:string
+    status: string
 }
 
 interface TaskUpdate extends Task {

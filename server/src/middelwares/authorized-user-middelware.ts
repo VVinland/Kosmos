@@ -6,19 +6,19 @@ const authorizedUserMiddelware = (req: Request, res: Response, next: NextFunctio
     try {
         const authorizationHeader = req.headers.authorization;
 
-        if (!authorizationHeader) throw ApiError.BadRequest('Отсутствует заголовок headers.authorization');
+        if (!authorizationHeader) throw ApiError.UnauthorizedError();
 
         const accessToken = authorizationHeader.split(' ')[1];
-        if (!accessToken) throw ApiError.BadRequest('Отсутствует accessToken в заголовке headers.authorization');
+        if (!accessToken) throw ApiError.UnauthorizedError();
 
         const userData = tokenService.validateAccessToken(accessToken);
-        if (!userData) throw ApiError.BadRequest('Ошибка валидация accessToken\`a');
+        if (!userData) throw ApiError.UnauthorizedError();
 
         next();
         return;
     } catch (error) {
         if (error instanceof Error) {
-            return next(ApiError.BadRequest(error.message));
+            return next(ApiError.UnauthorizedError());
         }
     }
 }
