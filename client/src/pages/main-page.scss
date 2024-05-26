@@ -3,6 +3,8 @@
     flex-direction: column;
     align-items: center;
     gap:10px;
+    height: 100%;
+    flex:1 0 auto;
     &__logout,
     &__createTask {
         background-color: black;

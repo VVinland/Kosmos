@@ -22,9 +22,9 @@ const App = observer(() => {
 
     return (
         <div className="app container">
-            <BrowserRouter>
-                <AppRouter />
-            </BrowserRouter>
+                <BrowserRouter>
+                    <AppRouter />
+                </BrowserRouter>
         </div>
     );
 });
