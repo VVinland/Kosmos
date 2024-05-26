@@ -3,6 +3,7 @@ import { Context } from '../..';
 import { Task } from '../../types';
 import { AxiosError } from 'axios';
 import { observer } from 'mobx-react-lite';
+import './task-form.scss';
 
 interface TaskFromProps {
     sign: string,
@@ -111,83 +112,113 @@ const TaskForm = observer(({ sign, taskData }: TaskFromProps) => {
 
     return (
         <div className="taskForm">
-            <div className="taskForm__content">
-                <label className="taskForm__item">Заголовок
-                    <input
-                        disabled={taskStore.labelCurrentlyArray === 'assigned'
-                            && sign === 'update' ?
-                            true :
-                            false
-                        }
-                        type="text"
-                        value={title}
-                        onChange={event => setTitle(event.target.value)}
-                        placeholder='Введите заголовок' /></label>
-                <label className="taskForm__item">Описание
-                    <input
-                        disabled={taskStore.labelCurrentlyArray === 'assigned'
-                            && sign === 'update' ?
-                            true :
-                            false
-                        }
-                        type="text"
-                        value={description}
-                        onChange={event => setDescription(event.target.value)}
-                        placeholder='Введите описание' /></label>
-                <label className="taskForm__item">Дата окончания
-                    <input
-                        disabled={taskStore.labelCurrentlyArray === 'assigned'
-                            && sign === 'update' ?
-                            true :
-                            false
-                        }
-                        type="date"
-                        value={dateEnd}
-                        ref={refDate}
-                        onChange={event => setDateEnd(event.target.value)}
-                        max='9999-12-31'
-                        placeholder='Введите дату' /></label>
-                <label className="taskForm__item">Ответственный
-                    <input
-                        disabled={taskStore.labelCurrentlyArray === 'assigned'
-                            && sign === 'update' ?
-                            true :
-                            false
-                        }
-                        type="text"
-                        value={responsible}
-                        onChange={event => setResponsible(event.target.value)}
-                        placeholder='Введите отвественного' /></label>
-                <label className="taskForm__item">Приоритет
-                    <select value={priority} onChange={event => setPriority(event.target.value)}
-                        disabled={taskStore.labelCurrentlyArray === 'assigned'
-                            && sign === 'update' ?
-                            true :
-                            false
-                        }>
-                        Выберите приоритет
-                        <option value='Высокйи'>Высокий</option>
-                        <option value='Средний'>Средний</option>
-                        <option value='Низкий'>Низкий</option>
-                    </select></label>
 
-                <label className="taskForm__item">Статус
-                    <select value={status} onChange={event => setStatus(event.target.value)}>
-                        Выберите статус
-                        <option value="К выполнению">К выполнению</option>
-                        <option value="Выполняется">Выполняется</option>
-                        <option value="Выполнена">Выполнена</option>
-                        <option value="Отменена">Отменена</option>
-                    </select>
+            <div className="taskForm__item">
+                <label htmlFor='title' className="taskForm__label">Заголовок
                 </label>
-                <div className="taskForm__submit">
-                    {sign === 'create' ?
-                        <button onClick={() => create()} >Создать задачу</button>
-                        :
-                        <button onClick={() => update()} >Обновить задачу</button>
+                <input className='taskForm__input'
+                    id='title'
+                    disabled={taskStore.labelCurrentlyArray === 'assigned'
+                        && sign === 'update' ?
+                        true :
+                        false
                     }
-                </div>
+                    autoComplete='off'
+                    type="text"
+                    value={title}
+                    onChange={event => setTitle(event.target.value)}
+                    placeholder='Введите заголовок' />
             </div>
+
+            <div className="taskForm__item">
+                <label htmlFor='description' className="taskForm__label">Описание
+                </label>
+                <input className='taskForm__input'
+                    id='description'
+                    disabled={taskStore.labelCurrentlyArray === 'assigned'
+                        && sign === 'update' ?
+                        true :
+                        false
+                    }
+                    autoComplete='off'
+                    type="text"
+                    value={description}
+                    onChange={event => setDescription(event.target.value)}
+                    placeholder='Введите описание' />
+            </div>
+            <div className="taskForm__item">
+                <label htmlFor='dateEnd' className="taskForm__label">Дата окончания
+                </label>
+                <input className='taskForm__input'
+                    id='dateEnd'
+                    disabled={taskStore.labelCurrentlyArray === 'assigned'
+                        && sign === 'update' ?
+                        true :
+                        false
+                    }
+                    type="date"
+                    value={dateEnd}
+                    ref={refDate}
+                    onChange={event => setDateEnd(event.target.value)}
+                    max='9999-12-31'
+                />
+            </div>
+            <div className="taskForm__item">
+                <label htmlFor='responsible' className="taskForm__label">Ответственный
+                </label>
+                <input className='taskForm__input'
+                    id='responsible'
+                    disabled={taskStore.labelCurrentlyArray === 'assigned'
+                        && sign === 'update' ?
+                        true :
+                        false
+                    }
+                    autoComplete='off'
+                    type="text"
+                    value={responsible}
+                    onChange={event => setResponsible(event.target.value)}
+                    placeholder='Введите отвественного' />
+            </div>
+            <div className="taskForm__item">
+                <label htmlFor='priority' className="taskForm__label">Приоритет
+                </label>
+                <select className='taskForm__select'
+                    id='priority'
+                    value={priority} onChange={event => setPriority(event.target.value)}
+                    disabled={taskStore.labelCurrentlyArray === 'assigned'
+                        && sign === 'update' ?
+                        true :
+                        false
+                    }>
+                    Выберите приоритет
+                    <option value='Высокйи'>Высокий</option>
+                    <option value='Средний'>Средний</option>
+                    <option value='Низкий'>Низкий</option>
+                </select>
+            </div>
+
+            <div className="taskForm__item">
+                <label htmlFor='status' className="taskForm__label">Статус
+                </label>
+                <select className='taskForm__select'
+                    id='status'
+                    value={status} onChange={event => setStatus(event.target.value)}>
+                    Выберите статус
+                    <option value="К выполнению">К выполнению</option>
+                    <option value="Выполняется">Выполняется</option>
+                    <option value="Выполнена">Выполнена</option>
+                    <option value="Отменена">Отменена</option>
+                </select>
+            </div>
+
+            <div className="taskForm__submit">
+                {sign === 'create' ?
+                    <button onClick={() => create()} >Создать задачу</button>
+                    :
+                    <button onClick={() => update()} >Обновить задачу</button>
+                }
+            </div>
+
 
         </div >
     );

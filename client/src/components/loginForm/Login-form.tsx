@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Context } from '../..';
-import { Navigate } from 'react-router-dom';
+import './login-form.scss';
 
 const LoginForm = () => {
     const [login, setLogin] = useState('');
@@ -18,18 +18,24 @@ const LoginForm = () => {
 
     return (
         <div className="loginForm">
-            <label className='loginForm__label'> Логин
-                <input type="text" className='loginForm__label'
+            <div className='loginForm__item'>
+                <label htmlFor='login' className='loginForm__label'> Логин
+                </label>
+                <input id='login' type="text" className='loginForm__input'
                     value={login}
+                    autoComplete='off'
                     onChange={event => setLogin(event.target.value)}
-                    placeholder='Введите логин' /></label>
+                    placeholder='Введите логин' />
+            </div>
 
-
-            <label className='loginForm__label'> Пароль
-                <input type="password" className='loginForm__label'
+            <div className='loginForm__item'>
+                <label htmlFor='password' className='loginForm__label' id='login'> Пароль
+                </label>
+                <input id='password' type="password" className='loginForm__input'
                     value={password}
                     onChange={event => setPassword(event.target.value)}
-                    placeholder='Введите пароль' /></label>
+                    placeholder='Введите пароль' />
+            </div>
 
             <button className="loginForm__button" onClick={loginUser}>Авторизоваться</button>
         </div>

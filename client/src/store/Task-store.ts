@@ -2,6 +2,7 @@ import { action, makeObservable, observable, reaction } from "mobx";
 import { Task } from "../types";
 import { AxiosError } from "axios";
 import TaskRequest from "../http/Task-request";
+import sorting from '../utils/sorting-task';
 
 class TaskStore {
     tasks: Task[] = [];
@@ -43,7 +44,7 @@ class TaskStore {
             const response = await TaskRequest.getCreatedTasks(login);
             this.setTasks(response.data)
             this.setLabelCurrentlyArray('created');
-            // this.tasks.reverse();
+            sorting.withoutSorting(this.tasks);
         } catch (error) {
             if (error instanceof AxiosError) {
                 console.error(error.response?.data?.message);
@@ -55,7 +56,7 @@ class TaskStore {
             const response = await TaskRequest.getAssignedTasks(login);
             this.setTasks(response.data);
             this.setLabelCurrentlyArray('assigned');
-            // this.tasks.reverse();
+            sorting.withoutSorting(this.tasks);
         } catch (error) {
             if (error instanceof AxiosError) {
                 console.log(error.response?.data?.message);

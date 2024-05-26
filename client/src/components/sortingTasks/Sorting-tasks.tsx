@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../..';
-import sorting from './../../utils/sorting';
+import sorting from '../../utils/sorting-task';
 import { Task } from '../../types';
+import './sorting-tasks.scss';
 
 interface SortingTaksProps {
     setTasks: (tasks: Task[]) => void;
@@ -40,7 +41,7 @@ const SortingTasks = ({ setTasks }: SortingTaksProps) => {
     return (
         <div className="sortingTasks">
             {taskStore.labelCurrentlyArray === 'assigned' ?
-                <select
+                <select className='sortingTasks__select'
                     value={nameDate}
                     onChange={event => setNameDate(event.target.value)}>
                     <option value='dateEnd' disabled>По дате завершения</option>
@@ -53,11 +54,11 @@ const SortingTasks = ({ setTasks }: SortingTaksProps) => {
             {
                 taskStore.labelCurrentlyArray === 'created'
                     ?
-                    <button onClick={() => sortingByResponsible()}>По отвественным</button>
+                    <button className='sortingTasks__sortingByResponsible' onClick={() => sortingByResponsible()}>По отвественным</button>
                     :
                     <></>
             }
-            <button onClick={() => withoutSorting()}>Без сортировки</button>
+            <button className='sortingTasks__withoutSorting' onClick={() => withoutSorting()}>Без сортировки</button>
         </div >
     );
 }

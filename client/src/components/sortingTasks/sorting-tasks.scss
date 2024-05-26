@@ -1,0 +1,18 @@
+.sortingTasks {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    &__sortingByResponsible, &__withoutSorting,
+    &__select {
+        background: black;
+        color: white;
+        border-radius: 8px;
+        padding:5px;
+        transition: all 0.2s linear 0s;
+    }
+
+    &__sortingByResponsible:active, &__withoutSorting:active{
+        transform: translateY(1px);
+    }
+}

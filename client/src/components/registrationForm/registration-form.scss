@@ -1,0 +1,46 @@
+.registrationForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    &__item {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &__label,
+    &__input,
+    &__button {
+        font-size: 16px;
+    }
+
+    &__label::after {
+        position: relative;
+        content: '*';
+        color: red;
+    }
+
+    #supervisorId::after {
+        content: '';
+    }
+
+    &__input {
+        border: 1px solid black;
+    }
+
+    &__button {
+        background: black;
+        color: white;
+        padding: 5px;
+        border-radius: 8px;
+        transition: all 0.2s linear 0s;
+    }
+
+    &__button:active {
+        transform: translateY(1px);
+    }
+}

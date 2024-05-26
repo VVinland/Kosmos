@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import LoginForm from '../components/loginForm/Login-form';
 import RegistrationForm from '../components/registrationForm/Registration-form';
 import { NavLink } from 'react-router-dom';
+import './public-page.scss';
 
 const PublicPage = () => {
     const initForm = () => {
@@ -11,7 +12,7 @@ const PublicPage = () => {
         }
         return true;
     }
-    
+
     const [form, setForm] = useState(initForm());
 
     const setActiveForm = () => {
@@ -22,7 +23,7 @@ const PublicPage = () => {
     return (
         <div className="publicPage">
             {form ? <LoginForm /> : <RegistrationForm />}
-            <div>
+            <div className="publicPage__transition">
                 <h1>Перейти в окно <NavLink to={''}
                     onClick={() => setActiveForm()}>{form ? 'регистрации' : 'авторизации'}
                 </NavLink> </h1>

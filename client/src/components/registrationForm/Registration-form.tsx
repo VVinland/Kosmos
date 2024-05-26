@@ -1,7 +1,7 @@
-import React, { Suspense, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { CandidateForNewUsers } from '../../types';
-import UserStore from '../../store/User-store';
 import { Context } from '../..';
+import './registration-form.scss';
 
 const RegistrationForm = () => {
     const [firstname, setFirstname] = useState('');
@@ -14,7 +14,7 @@ const RegistrationForm = () => {
     const { userStore } = useContext(Context);
 
     const registrationUser = async () => {
-        try { 
+        try {
             const candidate: CandidateForNewUsers = {
                 firstname: firstname.trim(),
                 lastname: lastname.trim(),
@@ -30,39 +30,68 @@ const RegistrationForm = () => {
         }
     }
 
+
     return (
         <div className="registrationForm">
-            <label htmlFor="" className="registrationForm__label">Имя
-                <input className='registrationForm__input' type="text"
+            <div className="registrationForm__item">
+                <label htmlFor="firstname" className="registrationForm__label">Имя
+                </label>
+                <input id='firstname' className='registrationForm__input' type="text"
                     value={firstname}
+                    autoComplete='off'
                     onChange={event => setFirstname(event.target.value)}
-                    placeholder='Введите имя' /></label>
-            <label htmlFor="" className="registrationForm__label">Фамилия
-                <input className='registrationForm__input' type="text"
+                    placeholder='Введите имя' />
+            </div>
+
+            <div className="registrationForm__item">
+                <label htmlFor="lastname" className="registrationForm__label">Фамилия
+                </label>
+                <input id='lastname' className='registrationForm__input' type="text"
                     value={lastname}
+                    autoComplete='off'
                     onChange={event => setLastname(event.target.value)}
-                    placeholder='Введите фамилию' /></label>
-            <label htmlFor="" className="registrationForm__label">Отчество
-                <input className='registrationForm__input' type="text"
+                    placeholder='Введите фамилию' />
+            </div>
+
+            <div className="registrationForm__item">
+                <label htmlFor="middlename" className="registrationForm__label">Отчество
+                </label>
+                <input id='middlename' className='registrationForm__input' type="text"
                     value={middlename}
+                    autoComplete='off'
                     onChange={event => setMiddlename(event.target.value)}
-                    placeholder='Введите отчество' /></label>
-            <label htmlFor="" className="registrationForm__label">Логин
-                <input className='registrationForm__input' type="text"
+                    placeholder='Введите отчество' />
+            </div>
+            <div className="registrationForm__item">
+                <label htmlFor="login" className="registrationForm__label">Логин
+                </label>
+                <input id='login' className='registrationForm__input' type="text"
                     value={login}
+                    autoComplete='off'
                     onChange={event => setLogin(event.target.value)}
-                    placeholder='Введите логин' /></label>
-            <label htmlFor="" className="registrationForm__label">Пароль
-                <input className='registrationForm__input' type="password"
+                    placeholder='Введите логин' />
+            </div>
+            <div className="registrationForm__item">
+                <label htmlFor="password" className="registrationForm__label">Пароль
+                </label>
+                <input id='password' className='registrationForm__input' type="password"
                     value={password}
                     onChange={event => setPassword(event.target.value)}
-                    placeholder='Введите пароль' /></label>
-            <label htmlFor="" className="registrationForm__label">Руководитель
-                <input className='registrationForm__input' type="text"
+                    placeholder='Введите пароль' />
+            </div>
+
+            <div className="registrationForm__item">
+                <label id='supervisorId' htmlFor="supervisor" className="registrationForm__label">Руководитель
+                
+                    </label>
+                <input id='supervisor' className='registrationForm__input' type="text"
                     value={supervisor}
+                    autoComplete='off'
                     onChange={event => setSupervisor(event.target.value)}
-                    placeholder='Введите имя руководителя' /></label>
-            <button className="loginForm__button"
+                    placeholder='Введите имя руководителя' />
+            </div>
+
+            <button className="registrationForm__button"
                 onClick={registrationUser}>Регистрация</button>
         </div>
     );
