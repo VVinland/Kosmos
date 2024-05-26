@@ -48,8 +48,6 @@ class TokenService {
 
     async removeRefreshToken(refreshToken: string) {
         const token = await db.query(`DELETE FROM refreshToken WHERE "refreshToken" = '${refreshToken}';`);
-        console.log(token);
-
         return token;
     }
 

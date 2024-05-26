@@ -3,7 +3,6 @@ import { Task } from "../types.js";
 
 class TaskService {
     async create(taskData: Task) {
-        console.log(taskData);
 
         const task = await db.query(`INSERT INTO task (title, description, "dateEnd",    
         "dateCreate", "updateDate", priority, creator, responsible, status)
