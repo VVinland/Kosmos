@@ -1,7 +1,5 @@
 import { UserData } from './../types.js';
 
-
-
 class UserDto implements UserData {
     id: number;
     firstname: string;

@@ -10,7 +10,7 @@ export default {
     mode: 'development',
     entry: path.join(__dirname, 'src', 'index.tsx'),
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'build'),
         filename: 'index[contenthash:8].js'
     },
     module: {
@@ -22,7 +22,7 @@ export default {
             },
             {
                 test: /\.(scss|css)$/,
-                use: ['style-loader', 'css-loader', {
+                use: [MiniCssExtractPlugin.loader, 'css-loader', {
                     loader: "postcss-loader",
                     options: {
                         postcssOptions: {
@@ -48,7 +48,7 @@ export default {
         new FilemanagerWebpackPlugin({
             events: {
                 onStart: {
-                    delete: ['dist']
+                    delete: ['build']
                 }
             }
         }),
@@ -62,8 +62,7 @@ export default {
         open: true,
         hot: true,
         liveReload: true,
-        historyApiFallback:true
+        historyApiFallback: true
     }
 }
 
-// export default developmentVersion;

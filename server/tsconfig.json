@@ -1,22 +1,25 @@
 {
   "compilerOptions": {
     "target": "ES2015",
-    "module": "ESNext", 
+    "module": "ES6",
     "moduleResolution": "Node",
-    "allowJs": true, 
+    "allowJs": true,
     "checkJs": true,
     "rootDir": "src",
-    "outDir": "./dist", 
+    "outDir": "./build",
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true, 
-    "forceConsistentCasingInFileNames": true, 
-    "strict": true, 
-    "noImplicitAny": true, 
-    "skipLibCheck": true
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
   },
   "include": [
     "src/**/*"
+  ],
+  "exclude": [
+    "src/types.ts"
   ],
   "ts-node": {
     "esm": true
