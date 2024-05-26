@@ -44,7 +44,7 @@ class TaskStore {
             const response = await TaskRequest.getCreatedTasks(login);
             this.setTasks(response.data)
             this.setLabelCurrentlyArray('created');
-            sorting.withoutSorting(this.tasks);
+            if (response.data.length > 1) sorting.withoutSorting(this.tasks);
         } catch (error) {
             if (error instanceof AxiosError) {
                 console.error(error.response?.data?.message);
@@ -56,7 +56,7 @@ class TaskStore {
             const response = await TaskRequest.getAssignedTasks(login);
             this.setTasks(response.data);
             this.setLabelCurrentlyArray('assigned');
-            sorting.withoutSorting(this.tasks);
+            if (response.data.length > 1) sorting.withoutSorting(this.tasks);
         } catch (error) {
             if (error instanceof AxiosError) {
                 console.log(error.response?.data?.message);
