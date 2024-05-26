@@ -16,12 +16,12 @@ const RegistrationForm = () => {
     const registrationUser = async () => {
         try { 
             const candidate: CandidateForNewUsers = {
-                firstname: firstname.replaceAll(' ', ''),
-                lastname: lastname.replaceAll(' ', ''),
-                middlename: middlename.replaceAll(' ', ''),
-                login: login.replaceAll(' ', ''),
-                password: password.replaceAll(' ', ''),
-                supervisor: supervisor.replaceAll(' ', '')
+                firstname: firstname.trim(),
+                lastname: lastname.trim(),
+                middlename: middlename.trim(),
+                login: login.trim(),
+                password: password.trim(),
+                supervisor: supervisor.trim()
             }
             await userStore.registration(candidate);
             alert('Пользователь успешно зарегистрировался');

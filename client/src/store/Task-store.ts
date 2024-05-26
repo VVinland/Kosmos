@@ -31,11 +31,10 @@ class TaskStore {
     async create(task: Task) {
         try {
             const response = await TaskRequest.create(task);
-            // alert('Задача успешно добавлена');
             return response.data;
         } catch (error) {
             if (error instanceof AxiosError) {
-                throw new AxiosError(error.response?.data);
+                throw new AxiosError(error.response?.data?.message);
             }
         }
     }
@@ -44,6 +43,7 @@ class TaskStore {
             const response = await TaskRequest.getCreatedTasks(login);
             this.setTasks(response.data)
             this.setLabelCurrentlyArray('created');
+            // this.tasks.reverse();
         } catch (error) {
             if (error instanceof AxiosError) {
                 console.error(error.response?.data?.message);
@@ -55,6 +55,7 @@ class TaskStore {
             const response = await TaskRequest.getAssignedTasks(login);
             this.setTasks(response.data);
             this.setLabelCurrentlyArray('assigned');
+            // this.tasks.reverse();
         } catch (error) {
             if (error instanceof AxiosError) {
                 console.log(error.response?.data?.message);
@@ -67,7 +68,7 @@ class TaskStore {
             alert('Задача успешно обновлена');
         } catch (error) {
             if (error instanceof AxiosError) {
-                throw new AxiosError(error.response?.data);
+                throw new AxiosError(error.response?.data?.message);
             }
         }
     }

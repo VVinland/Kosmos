@@ -1,5 +1,5 @@
 import db from './../db.js';
-import { Task, TaskUpdate } from "../types.js";
+import { Task } from "../types.js";
 
 class TaskService {
     async create(taskData: Task) {
@@ -11,7 +11,7 @@ class TaskService {
             '${taskData.dateCreate}', '${taskData.updateDate}','${taskData.priority}',
             '${taskData.creator}', '${taskData.responsible}', '${taskData.status}') RETURNING *;`);
 
-        
+
         return task.rows[0];
     };
 
@@ -26,7 +26,7 @@ class TaskService {
         return tasks.rows;
     }
 
-    async update(taskData: TaskUpdate) {
+    async update(taskData: Task) {
 
         const task = await db.query(`UPDATE task SET
          title='${taskData.title}',

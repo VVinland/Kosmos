@@ -44,5 +44,6 @@ export {
     AuthResponse,
     CandidateForNewUsers,
     Task,
-    RouteStructure
+    RouteStructure,
+    
 }

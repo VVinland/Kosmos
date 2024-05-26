@@ -10,7 +10,7 @@ const LoginForm = () => {
 
     const loginUser = async () => {
         try {
-            await userStore.login(login.replaceAll(' ', ''), password.replaceAll(' ', ''));
+            await userStore.login(login.trim(), password.trim());
         } catch (error) {
             alert(error);
         }

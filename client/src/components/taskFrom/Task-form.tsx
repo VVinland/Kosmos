@@ -9,15 +9,14 @@ interface TaskFromProps {
     taskData?: Task
 }
 
-
 const TaskForm = observer(({ sign, taskData }: TaskFromProps) => {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [dateEnd, setDateEnd] = useState('');
     const [responsible, setResponsible] = useState('');
-    const [priority, setPriority] = useState('High');
-    const [status, setStatus] = useState('to implementation');
+    const [priority, setPriority] = useState('Высокий');
+    const [status, setStatus] = useState('К выполнению');
 
     const { taskStore, userStore } = useContext(Context);
 
@@ -37,7 +36,7 @@ const TaskForm = observer(({ sign, taskData }: TaskFromProps) => {
     const createNewDate = () => {
         const milliseconds = Date.now();
         const date = new Date(milliseconds);
-        const localDate = date.toLocaleDateString();
+        const localDate = date.toLocaleString();
         return localDate;
     }
     const updateStates = () => {
@@ -46,16 +45,16 @@ const TaskForm = observer(({ sign, taskData }: TaskFromProps) => {
         setDateEnd('');
         refDate.current.value = '';
         setResponsible('');
-        setPriority('High');
-        setStatus('to implementation');
+        setPriority('Высокий');
+        setStatus('К выполнению');
     }
 
     const assembleTask = () => {
         const task: Task = {
-            title: title.replaceAll(' ', ''),
-            description: description.replaceAll(' ', ''),
+            title: title.trim(),
+            description: description.trim(),
             dateEnd,
-            responsible: responsible.replaceAll(' ', ''),
+            responsible: responsible.trim(),
             priority,
             status,
             creator: userStore.userData.login,
@@ -68,7 +67,7 @@ const TaskForm = observer(({ sign, taskData }: TaskFromProps) => {
     const create = async () => {
         try {
             const templateTask = assembleTask();
-            const task = {
+            const task: Task = {
                 ...templateTask,
                 dateCreate: createNewDate(),
                 updateDate: createNewDate()
@@ -81,7 +80,7 @@ const TaskForm = observer(({ sign, taskData }: TaskFromProps) => {
             return;
         } catch (error) {
             if (error instanceof AxiosError) {
-                alert(error.message);
+                alert(error);
             }
         }
         finally {
@@ -92,7 +91,7 @@ const TaskForm = observer(({ sign, taskData }: TaskFromProps) => {
     const update = async () => {
         try {
             const templateTask = assembleTask();
-            const task = {
+            const task: Task = {
                 ...templateTask,
                 updateDate: createNewDate(),
                 dateCreate: taskData!.dateCreate,
@@ -105,7 +104,7 @@ const TaskForm = observer(({ sign, taskData }: TaskFromProps) => {
 
         } catch (error) {
             if (error instanceof AxiosError) {
-                alert(error.message);
+                alert(error);
             }
         }
     }
@@ -167,18 +166,18 @@ const TaskForm = observer(({ sign, taskData }: TaskFromProps) => {
                             false
                         }>
                         Выберите приоритет
-                        <option value='High'>Высокий</option>
-                        <option value='Middle'>Средний</option>
-                        <option value='low'>Низкий</option>
+                        <option value='Высокйи'>Высокий</option>
+                        <option value='Средний'>Средний</option>
+                        <option value='Низкий'>Низкий</option>
                     </select></label>
 
                 <label className="taskForm__item">Статус
                     <select value={status} onChange={event => setStatus(event.target.value)}>
                         Выберите статус
-                        <option value="to implementation">К выполнению</option>
-                        <option value="performed">Выполняется</option>
-                        <option value="completed">Выполнена</option>
-                        <option value="canceled">Отменена</option>
+                        <option value="К выполнению">К выполнению</option>
+                        <option value="Выполняется">Выполняется</option>
+                        <option value="Выполнена">Выполнена</option>
+                        <option value="Отменена">Отменена</option>
                     </select>
                 </label>
                 <div className="taskForm__submit">

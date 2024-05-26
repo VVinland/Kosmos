@@ -17,19 +17,16 @@ interface AuthUserData {
     user: UserData
 }
 interface Task {
+    id?: number,
     title: string,
     description: string,
-    dateEnd: Date,
-    dateCreate: Date,
-    updateDate: Date,
+    dateEnd: string,
+    dateCreate: string,
+    updateDate: string,
     priority: string,
     creator: string,
     responsible: string,
     status: string
-}
-
-interface TaskUpdate extends Task {
-    id: number
 }
 
 export {
@@ -37,5 +34,4 @@ export {
     AuthUserData,
     UserData,
     Task,
-    TaskUpdate
 }
